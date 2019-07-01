@@ -1,5 +1,8 @@
 # HelloSpring
 
+Github : https://github.com/JONGSUNMOON/HelloSpring
+executable jar : https://github.com/JONGSUNMOON/HelloSpring/blob/master/HelloSpring/target/HelloSpring-0.0.1-SNAPSHOT.jar
+
 - 개발환경
 1. Spring Boot
 2. Redis
