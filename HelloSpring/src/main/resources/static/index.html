@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Kakao 장소 검색</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <style>
+	.label {margin-bottom: 96px;}
+	.label * {display: inline-block;vertical-align: top;}
+	.label .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
+	.label .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
+	.label .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
+	</style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+        	<div id="userIdInfo"></div>
+            <a id="aSignIn" class="navbar-brand" href="signin.html">로그인</a>
+            <a id="aSignOut" class="navbar-brand" href="signout.html">로그아웃</a>
+            <a id="aSignUp" class="navbar-brand" href="signup.html">사용자생성</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>Kakao 장소 검색</h1>
+        
+        <div id="feedbackDetail"></div>
+        <div id="map" style="width:300px;height:200px;"></div><br/>
+
+        <div id="feedback"></div>
+
+        <form class="form-horizontal" id="search-form">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">키워드</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="btn-search" class="btn btn-primary btn-lg">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <footer>
+	    <table class="table table-striped">
+		    <thead>
+		        <tr>
+				    <th><label class="alert alert-info">내 검색 히스토리</label></th>
+				    <th><label class="alert alert-info">인기 키워드 목록</label></th>
+			    </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+				    <td><div class="col-sm-10" id="historyKeyword"></div></td>
+				    <td><div class="col-sm-10" id="rankKeyword"></div></td>
+			    </tr>
+		    </tbody>
+	    </table>
+    </footer>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  
+<script>
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        contentType: "text/html",
+        url: "/user/history",
+        data: null,
+        dataType: 'text',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+        	$('#historyKeyword').html(data);
+        },
+        error: function (e) {
+        	alert("GET /user/history fail");
+        }
+    });
+    
+    $.ajax({
+        type: "GET",
+        contentType: "text/html",
+        url: "/rank/keyword",
+        data: null,
+        dataType: 'text',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+        	$('#rankKeyword').html(data);
+        },
+        error: function (e) {
+        	alert("GET /rank/keyword fail");
+        }
+    });
+});
+</script>
+  
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8bc3c6de1da503e47e5a5d78f838f837"></script>  
+
+<script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>
