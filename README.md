@@ -1,16 +1,15 @@
 # HelloSpring
 
 - 개발환경
-Spring Boot
-Redis
-JAVA
-Javascript
+1. Spring Boot
+2. Redis
+3. JAVA
 
 - 개발툴
-STS 4.3.0
+1. STS 4.3.0
 
 - 오픈소스
-CryptoJS = 
+1. CryptoJS (목적 : 암/복호화)
 
 - 실행가이드
 1. Redis Server Start (Port: 6379)
